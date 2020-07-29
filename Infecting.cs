@@ -23,13 +23,14 @@ namespace Infection
         {
             if (!plugin.Config.ZombiesInfect && !plugin.Config.PeanutInfects && !plugin.Config.DogInfects) return;
             if(plugin.Config.CassieAnnounce)
-                RespawnEffectsController.PlayCassieAnnouncement("Danger . O5 command has detected a critical containment failure of SCP 0 0 8 . allremaining", false, true);
+                RespawnEffectsController.PlayCassieAnnouncement("Danger . Critical containment failure of N E nato_a 0 0 8 detected . allremaining", false, true);
         }
 
         public void OnPlayerDying(DyingEventArgs ev)
         {
             if(ev.Killer.Role == RoleType.Scp0492 && plugin.Config.ZombiesInfect || ev.Killer.Role == RoleType.Scp173 && plugin.Config.PeanutInfects || ev.Killer.Role == RoleType.Scp93953 && plugin.Config.DogInfects || ev.Killer.Role == RoleType.Scp93989 && plugin.Config.DogInfects)
             {
+                ev.IsAllowed = false;
                 float chance = (float)Gen.Next(1, 100);
                 if (chance <= plugin.Config.InfectionChance)
                 {
