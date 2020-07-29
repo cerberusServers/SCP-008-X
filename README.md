@@ -1,9 +1,14 @@
 # Infection
 A plugin for SCP:SL that enables server hosts to toggle classes infecting their targets on kill. This plugin requires EXILED 2.x to operate.
 # Config Options
-* [bool] is_enabled (Toggle the plugin)
-* [int] infection_chance (The percentage chance infecting classes can infect their targets)
-* [bool] cassie_accouncement (Toggle the cassie accounement at the start of every round)
-* [bool] zombies_infect (Toggle zombies being able to infect their targets)
-* [bool] peanut_infects (Toggle SCP-173 being able to infect its targets)
-* [bool] dog_infects (Toggle SCP-939 being able to infect their targets)
+
+| Name | Type | Description | Default |
+| --- | --- | --- | --- |
+| is_enabled | bool | Toggles the plugin | true |
+| infection_chance | int | Percentage chance of infection | 25% |
+| cassie_announcement | bool | Toggles the announcement when the round starts | true |
+| zombies_infect | bool | Toggles SCP-049-2 infecting targets | true |
+| peanut_infects | bool | Toggles SCP-173 infecting targets | false |
+| dog_infects | bool | Toggles SCP-939 infecting targets | false |
+This plugin is still under development and planned to include an infection-over-time mechanic for SCP-049-2 targets, treatment system for aforementioned mechanic, and cusomtizable cassie announcements to name a few. I also plan to add whatever is in high demand from the plugin's users, so feel free to submit your ideas!
+If something is not working as intended or outright broken, please submit an issue ticket and I'll look into it as soon as possible!
