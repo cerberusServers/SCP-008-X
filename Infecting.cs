@@ -21,14 +21,24 @@ namespace Infection
 
         public void OnRoundStart()
         {
-            if (!plugin.Config.ZombiesInfect && !plugin.Config.PeanutInfects && !plugin.Config.DogInfects) return;
             if(plugin.Config.CassieAnnounce)
-                RespawnEffectsController.PlayCassieAnnouncement("Danger . Critical containment failure of N E nato_a 0 0 8 detected . allremaining", false, true);
+            {
+                if (plugin.Config.ZombiesInfect || plugin.Config.PeanutInfects || plugin.Config.DogInfects)
+                    RespawnEffectsController.PlayCassieAnnouncement("Danger . Critical containment failure of N E nato_a 0 0 8 detected . allremaining", false, true);
+            }
+        }
+
+        public void OnPlayerHurt(HurtingEventArgs ev)
+        {
+            if (plugin.Config.DogDamage >= 0 && ev.Attacker.Role == RoleType.Scp93953 || plugin.Config.DogDamage >= 0 && ev.Attacker.Role == RoleType.Scp93989)
+                ev.Amount = plugin.Config.DogDamage;
+            if (plugin.Config.ZombieDamage >= 0 && ev.Attacker.Role == RoleType.Scp0492)
+                ev.Amount = plugin.Config.ZombieDamage;
         }
 
         public void OnPlayerDying(DyingEventArgs ev)
         {
-            if(ev.Killer.Role == RoleType.Scp0492 && plugin.Config.ZombiesInfect || ev.Killer.Role == RoleType.Scp173 && plugin.Config.PeanutInfects || ev.Killer.Role == RoleType.Scp93953 && plugin.Config.DogInfects || ev.Killer.Role == RoleType.Scp93989 && plugin.Config.DogInfects)
+            if (ev.Killer.Role == RoleType.Scp0492 && plugin.Config.ZombiesInfect || ev.Killer.Role == RoleType.Scp173 && plugin.Config.PeanutInfects || ev.Killer.Role == RoleType.Scp93953 && plugin.Config.DogInfects || ev.Killer.Role == RoleType.Scp93989 && plugin.Config.DogInfects)
             {
                 ev.IsAllowed = false;
                 float chance = (float)Gen.Next(1, 100);
