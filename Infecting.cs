@@ -48,6 +48,14 @@ namespace Infection
                     Timing.CallDelayed(0.3f, () =>
                         ev.Target.Position = ev.Killer.Position);
 
+                    if(plugin.Config.InfectedHealth >= 0)
+                    {
+                        if (ev.Target.Role == RoleType.Scp0492)
+                            ev.Target.Health = 225;
+                        else
+                            ev.Target.Health = plugin.Config.InfectedHealth;
+                    }
+
                 }
             }
         }

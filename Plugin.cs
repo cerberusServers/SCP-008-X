@@ -14,7 +14,7 @@ namespace Infection
     {
         public override string Author { get; } = "DGvagabond";
         public override string Name { get; } = "Infection";
-        public override Version Version { get; } = new Version(1, 0, 2);
+        public override Version Version { get; } = new Version(1, 0, 3);
         public override Version RequiredExiledVersion { get; } = new Version(2, 0, 6);
 
         public Infecting PluginEvents;
