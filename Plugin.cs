@@ -14,20 +14,21 @@ namespace Infection
     {
         public override string Author { get; } = "DGvagabond";
         public override string Name { get; } = "Infection";
-        public override Version Version { get; } = new Version(1, 0, 3);
-        public override Version RequiredExiledVersion { get; } = new Version(2, 0, 6);
+        public override Version Version { get; } = new Version(1, 0, 4);
+        public override Version RequiredExiledVersion { get; } = new Version(2, 0, 9);
 
-        public Infecting PluginEvents;
+        public EventHandlers PluginEvents;
         public static Plugin Singleton;
         public override void OnEnabled()
         {
             try
             {
                 Singleton = this;
-                PluginEvents = new Infecting(this);
+                PluginEvents = new EventHandlers(this);
 
                 Handlers.Player.Dying += PluginEvents.OnPlayerDying;
                 Handlers.Player.Hurting += PluginEvents.OnPlayerHurt;
+                Handlers.Player.ChangingRole += PluginEvents.OnRoleChange;
                 Handlers.Server.RoundStarted += PluginEvents.OnRoundStart;
 
                 Log.Info($"v{Version}, made by {Author}, successfully loaded.");
@@ -43,6 +44,7 @@ namespace Infection
         {
             Handlers.Player.Dying -= PluginEvents.OnPlayerDying;
             Handlers.Player.Hurting -= PluginEvents.OnPlayerHurt;
+            Handlers.Player.ChangingRole -= PluginEvents.OnRoleChange;
             Handlers.Server.RoundStarted -= PluginEvents.OnRoundStart;
 
             PluginEvents = null;
