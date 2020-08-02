@@ -7,6 +7,7 @@ A plugin for SCP:SL that enables server hosts to toggle classes infecting their 
 | is_enabled | bool | Toggles the plugin | true |
 | infection_chance | int | Percentage chance of infection | 25% |
 | infected_health | int | Amount of health infected targets spawn with | 1500 |
+| zombie_health | int | Amount of health infected zombies spawn with | 225 |
 | cassie_announcement | bool | Toggles the announcement when the round starts | true |
 | zombie_damage | int | Set how much damage SCP-049-2 deals on hit | 65 |
 | zombies_infect | bool | Toggles SCP-049-2 infecting targets | true |
@@ -19,8 +20,8 @@ A plugin for SCP:SL that enables server hosts to toggle classes infecting their 
 ## zombie_damage and dog_damage
 Something important to note of these config values is that they are INDEPENDENT from the `zombies_infect` and `dog_infects` values. This means you can have them both not be infectious and their damage values will still be in effect.
 
-## infected_health
-Please note that SCP-049-2 are currently unaffected by this value since they are already extremely weak. As it stands, those infected by SCP-049-2 will spawn with **225** HP. All other infectious SCPs will spawn with the amount of HP you configure with this option. This will allow you to make the main-line infected instances of SCP-173 and SCP-939 either weaker or even stronger than the original.
+## infected_health and zombie_health
+All infectious SCPs will spawn with the amount of HP you configure with these options. This will allow you to make the infected instances either weaker or even stronger than the original.
 
 ## SCP-049-2 Suicide Prevention
 Server owners can decide whether or not to allow SCP-049-2 to kill itself with this feature. A configurable broadcast will also be displayed on their screen to notify them that suiciding is against server rules.
