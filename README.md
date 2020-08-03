@@ -6,6 +6,7 @@ A plugin for SCP:SL that enables server hosts to toggle classes infecting their 
 | --- | --- | --- | --- |
 | is_enabled | bool | Toggles the plugin | true |
 | infection_chance | int | Percentage chance of infection | 25% |
+| buff_doctor | bool | Activate buffs for SCP-049 | false |
 | infected_health | int | Amount of health infected targets spawn with | 1500 |
 | zombie_health | int | Amount of health infected zombies spawn with | 225 |
 | cassie_announcement | bool | Toggles the announcement when the round starts | true |
@@ -25,6 +26,9 @@ All infectious SCPs will spawn with the amount of HP you configure with these op
 
 ## SCP-049-2 Suicide Prevention
 Server owners can decide whether or not to allow SCP-049-2 to kill itself with this feature. A configurable broadcast will also be displayed on their screen to notify them that suiciding is against server rules.
+
+## SCP-049 Buffs
+Added by request, enabling the SCP-049 buff currently allows him to instantly revive corpses rather than waiting for the recall to complete.
 
 This plugin is still under development and planned to include an infection-over-time mechanic for SCP-049-2 targets, treatment system for aforementioned mechanic, and customizable cassie announcements to name a few. I also plan to add whatever is in high demand from the plugin's users, so feel free to submit your ideas!
 If something is not working as intended or outright broken, please submit an issue ticket and I'll look into it as soon as possible!
