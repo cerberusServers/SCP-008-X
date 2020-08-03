@@ -38,7 +38,6 @@ namespace Infection
                     int chance = (int)Gen.Next(1, 100);
                     if (chance <= plugin.Config.InfectionChance)
                     {
-                        ev.IsAllowed = false;
                         ev.Target.SetRole(ev.Killer.Role, true);
                         if (ev.Target.Role == RoleType.Scp0492)
                             ev.Target.Health = plugin.Config.ZombieHealth;
