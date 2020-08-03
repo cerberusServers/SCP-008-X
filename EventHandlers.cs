@@ -71,7 +71,7 @@ namespace Infection
         {
             if(ev.NewRole == RoleType.Scp0492)
             {
-                if (!plugin.Config.ZombieSuicides)
+                if (plugin.Config.SuicideBroadcast != null)
                 {
                     ev.Player.ClearBroadcasts();
                     ev.Player.Broadcast(10, plugin.Config.SuicideBroadcast);
