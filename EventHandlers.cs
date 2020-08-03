@@ -50,6 +50,7 @@ namespace Infection
                     }
                     ev.Target.ClearBroadcasts();
                     ev.Target.Broadcast(10, plugin.Config.SuicideBroadcast);
+                    ev.IsAllowed = false;
                 }
                 if (ev.Killer.Role == RoleType.Scp0492 && plugin.Config.ZombiesInfect || ev.Killer.Role == RoleType.Scp173 && plugin.Config.PeanutInfects || ev.Killer.Role.Is939() && plugin.Config.DogInfects)
                 {
