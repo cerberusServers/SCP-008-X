@@ -6,6 +6,7 @@ A plugin for SCP:SL that enables server hosts to toggle classes infecting their 
 | --- | --- | --- | --- |
 | is_enabled | bool | Toggles the plugin | true |
 | infection_chance | int | Percentage chance of infection | 25% |
+| cure_chance | int | Percentage chance of being cured when using a medkit | 50% |
 | buff_doctor | bool | Activate buffs for SCP-049 | false |
 | infected_health | int | Amount of health infected targets spawn with | 1500 |
 | zombie_health | int | Amount of health infected zombies spawn with | 225 |
@@ -18,17 +19,8 @@ A plugin for SCP:SL that enables server hosts to toggle classes infecting their 
 | dog_infects | bool | Toggles SCP-939 infecting targets | false |
 | dog_damage | int | Set how much damage SCP-939 deals on hit | 65 |
 
-## zombie_damage and dog_damage
-Something important to note of these config values is that they are INDEPENDENT from the `zombies_infect` and `dog_infects` values. This means you can have them both not be infectious and their damage values will still be in effect.
+## How does it work?
+It will give **SCP-049-2** the ability to infect it's targets on hit. The targets will receive the `Poisoned` status effect. In order to cure the infection, you must either use `SCP-500` for a guaranteed success or gamble with a `Medkit`'s 50% chance cure rate (This chance is configurable). Players that die due to being `Poisoned` or by an attack from SCP-049-2 will spawn as SCP-049-2 as well. The other infectious SCPs you enable will only "infect" their targets before they die, meaning you will have to kill your prey for a chance to infect them.
 
-## infected_health and zombie_health
-All infectious SCPs will spawn with the amount of HP you configure with these options. This will allow you to make the infected instances either weaker or even stronger than the original.
-
-## SCP-049-2 Suicide Prevention
-Server owners can decide whether or not to allow SCP-049-2 to kill itself with this feature. A configurable broadcast will also be displayed on their screen to notify them that suiciding is against server rules.
-
-## SCP-049 Buffs
-Added by request, enabling the SCP-049 buff currently allows him to instantly revive corpses rather than waiting for the recall to complete.
-
-This plugin is still under development and planned to include an infection-over-time mechanic for SCP-049-2 targets, treatment system for aforementioned mechanic, and customizable cassie announcements to name a few. I also plan to add whatever is in high demand from the plugin's users, so feel free to submit your ideas!
+This plugin is still under development and I plan to add whatever is in high demand from the plugin's users, so feel free to submit your ideas!
 If something is not working as intended or outright broken, please submit an issue ticket and I'll look into it as soon as possible!
