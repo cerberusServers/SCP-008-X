@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using CustomPlayerEffects;
 using Exiled.Events.EventArgs;
 using UnityEngine;
@@ -9,7 +9,6 @@ namespace Infection
     {
         public System.Random Gen = new System.Random();
         public Plugin plugin;
-        public GameObject infected;
         public Player(Plugin plugin) => this.plugin = plugin;
 
         public void OnPlayerHurt(HurtingEventArgs ev)
@@ -18,7 +17,7 @@ namespace Infection
                 ev.Amount = plugin.Config.DogDamage;
             if (plugin.Config.ZombieDamage >= 0 && ev.Attacker.Role == RoleType.Scp0492)
                 ev.Amount = plugin.Config.ZombieDamage;
-            if(plugin.Config.ZombiesInfect)
+            if(plugin.Config.ZombiesInfect && ev.Attacker.Role == RoleType.Scp0492)
             {
                 int chance = (int)Gen.Next(1, 100);
                 if(chance <= plugin.Config.InfectionChance)
