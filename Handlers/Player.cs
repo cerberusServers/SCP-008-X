@@ -17,7 +17,7 @@ namespace Infection
                 ev.Amount = plugin.Config.DogDamage;
             if (plugin.Config.ZombieDamage >= 0 && ev.Attacker.Role == RoleType.Scp0492)
                 ev.Amount = plugin.Config.ZombieDamage;
-            if(plugin.Config.ZombiesInfect && ev.Attacker.Role == RoleType.Scp0492)
+            if(plugin.Config.ZombiesInfect && ev.Attacker.Role == RoleType.Scp0492 && ev.Target.Role != RoleType.Scp0492)
             {
                 int chance = (int)Gen.Next(1, 100);
                 if(chance <= plugin.Config.InfectionChance)
