@@ -1,11 +1,8 @@
 ﻿using System.ComponentModel;
-using System.Diagnostics.Tracing;
 using Exiled.API.Interfaces;
-using Exiled.Loader;
-
 namespace Infection
 {
-    public class Config : IConfig
+    public saled class Config : IConfig
     {
         public bool IsEnabled { get; set; } = true;
         public int InfectionChance { get; set; } = 100;
