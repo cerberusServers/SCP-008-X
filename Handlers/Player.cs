@@ -1,7 +1,6 @@
-using System.Linq;
+﻿using System.Linq;
 using CustomPlayerEffects;
 using Exiled.Events.EventArgs;
-using UnityEngine;
 
 namespace Infection
 {
@@ -17,18 +16,19 @@ namespace Infection
                 ev.Amount = plugin.Config.DogDamage;
             if (plugin.Config.ZombieDamage >= 0 && ev.Attacker.Role == RoleType.Scp0492)
                 ev.Amount = plugin.Config.ZombieDamage;
-            if(plugin.Config.ZombiesInfect && ev.Attacker.Role == RoleType.Scp0492 && ev.Target.Role != RoleType.Scp0492)
+            if (ev.Attacker.Role == RoleType.Scp0492)
+                ev.Attacker.AdrenalineHealth += plugin.Config.Scp008Buff;
+            if (plugin.Config.ZombiesInfect && ev.Attacker.Role == RoleType.Scp0492 && ev.Target.Role != RoleType.Scp0492)
             {
                 int chance = (int)Gen.Next(1, 100);
                 if(chance <= plugin.Config.InfectionChance)
                 {
                     ev.Target.ReferenceHub.playerEffectsController.EnableEffect<Poisoned>();
                     ev.Target.ClearBroadcasts();
-                    ev.Target.Broadcast(10, "You've been infected! Use a medkit to have a chance to cure yourself, or use SCP 500 to be fully cured!");
+                    ev.Target.Broadcast(10, "You've been <color=red>infected</color>! Use a medkit to have a chance to cure yourself, or use SCP 500 to be fully cured!");
                 }
             }
         }
-
         public void OnHealing(UsedMedicalItemEventArgs ev)
         {
             int cure = (int)Gen.Next(1, 100);
@@ -37,41 +37,35 @@ namespace Infection
             if(ev.Item == ItemType.Medkit && cure <= plugin.Config.CureChance)
                 ev.Player.ReferenceHub.playerEffectsController.DisableEffect<Poisoned>(); // Percentage cure based on config settings
         }
-
         public void OnPlayerDying(DyingEventArgs ev)
         {
-            if (!plugin.Config.ZombieSuicides)
+            if (!plugin.Config.ZombieSuicides &&
+                ev.Target.Role == RoleType.Scp0492 &&
+                ev.Target == ev.Killer &&
+                DamageTypes.FromIndex(ev.HitInformation.Tool).name == "FALLDOWN")
             {
-                if (ev.Target.Role == RoleType.Scp0492 && ev.Target == ev.Killer)
-                {
-                    if (DamageTypes.FromIndex(ev.HitInformation.Tool).name == "FALLDOWN")
-                    {
-                        Exiled.API.Features.Player zombie = Exiled.API.Features.Player.List.FirstOrDefault(x => x.Role == RoleType.Scp0492 && x.UserId != string.Empty && x != ev.Target);
-                        if (zombie != null) ev.Target.Position = zombie.Position;
-                        else ev.IsAllowed = true;
-                    }
-                    ev.Target.ClearBroadcasts();
-                    ev.Target.Broadcast(10, plugin.Config.SuicideBroadcast);
-                    ev.IsAllowed = false;
-                }
-
-                if (ev.Killer.Role == RoleType.Scp0492 && plugin.Config.ZombiesInfect || 
-                    ev.Killer.Role == RoleType.Scp173 && plugin.Config.PeanutInfects || 
-                    ev.Killer.Role.Is939() && plugin.Config.DogInfects)
-                {
-                    int chance = (int)Gen.Next(1, 100);
-                    if(chance <= plugin.Config.InfectionChance)
-                        ev.Target.SetRole(ev.Killer.Role, true);
-                        if (ev.Target.Role == RoleType.Scp0492)
-                            ev.Target.Health = plugin.Config.ZombieHealth;
-                        else
-                            ev.Target.Health = plugin.Config.InfectedHealth;
-                }
-                if (DamageTypes.FromIndex(ev.HitInformation.Tool).name == "POISONED")
-                {
-                    ev.Target.SetRole(RoleType.Scp0492, true);
-                    ev.Target.Health = plugin.Config.ZombieHealth;
-                }
+                Exiled.API.Features.Player zombie = Exiled.API.Features.Player.List.FirstOrDefault(x => x.Role == RoleType.Scp0492 && x.UserId != string.Empty && x != ev.Target);
+                if (zombie != null)
+                    ev.Target.Position = zombie.Position;
+                ev.Target.ClearBroadcasts();
+                ev.Target.Broadcast(10, plugin.Config.SuicideBroadcast);
+            }
+            if (ev.Killer.Role == RoleType.Scp0492 && plugin.Config.ZombiesInfect || 
+                ev.Killer.Role == RoleType.Scp173 && plugin.Config.PeanutInfects || 
+                ev.Killer.Role.Is939() && plugin.Config.DogInfects)
+            {
+                int chance = (int)Gen.Next(1, 100);
+                if(chance <= plugin.Config.InfectionChance)
+                    ev.Target.SetRole(ev.Killer.Role, true);
+                    if (ev.Target.Role == RoleType.Scp0492)
+                        ev.Target.Health = plugin.Config.ZombieHealth;
+                    else
+                        ev.Target.Health = plugin.Config.InfectedHealth;
+            }
+            if (DamageTypes.FromIndex(ev.HitInformation.Tool).name == "POISONED")
+            {
+                ev.Target.SetRole(RoleType.Scp0492, true);
+                ev.Target.Health = plugin.Config.ZombieHealth;
             }
         }
         public void OnRecall(StartingRecallEventArgs ev)
@@ -90,6 +84,7 @@ namespace Infection
                 {
                     ev.Player.ClearBroadcasts();
                     ev.Player.Broadcast(10, plugin.Config.SuicideBroadcast);
+                    ev.Player.AdrenalineHealth = plugin.Config.Scp008Buff;
                 }
             }
         }
