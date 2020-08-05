@@ -12,10 +12,13 @@ namespace Infection
         public int CureChance { get; set; } = 50;
         [Description("Allow SCP-049 to instantly revive targets?")]
         public bool BuffDoctor { get; set; } = false;
-        public int ZombieHealth { get; set; } = 225;
+        public int ZombieHealth { get; set; } = 300;
+        [Description("How much AHP should be given to Zombies?")]
+        public int Scp008Buff { get; set; } = 10;
         public int InfectedHealth { get; set; } = 1500;
         public bool CassieAnnounce { get; set; } = true;
-        public int ZombieDamage { get; set; } = 32;
+        public string Announcement { get; set; } = "SCP 0 0 8 containment breach detected . Allremaining";
+        public int ZombieDamage { get; set; } = 24;
         public bool ZombiesInfect { get; set; } = true;
         [Description("Should SCP-049-2 be allowed to commit suicide?")]
         public bool ZombieSuicides { get; set; } = false;
