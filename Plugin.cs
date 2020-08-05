@@ -8,12 +8,6 @@ namespace Infection
 {
     public class Plugin : Plugin<Config>
     {
-        private static readonly Lazy<Plugin> Linstance = new Lazy<Plugin>(valueFactory:() => new Plugin());
-        public Plugin Instance => Linstance.Value;
-        private Plugin()
-        {
-        }
-
         public override PluginPriority Priority { get; } = PluginPriority.Medium;
 
         public override string Author { get; } = "DGvagabond";
