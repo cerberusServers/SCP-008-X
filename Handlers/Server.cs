@@ -5,6 +5,8 @@ namespace SCP008X.Handlers
     public class Server
     {
         public System.Random Gen = new System.Random();
+        public Plugin plugin;
+        public Server(Plugin plugin) => this.plugin = plugin;
 
         public void OnRoundStart()
         {
