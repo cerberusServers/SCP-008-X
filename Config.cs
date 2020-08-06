@@ -13,7 +13,6 @@ namespace SCP008X
         public int ZombieHealth { get; set; } = 300;
         [Description("How much AHP should be given to Zombies?")]
         public int Scp008Buff { get; set; } = 10;
-        public int InfectedHealth { get; set; } = 1500;
         public bool CassieAnnounce { get; set; } = true;
         public string Announcement { get; set; } = "SCP 0 0 8 containment breach detected . Allremaining";
         public int ZombieDamage { get; set; } = 24;
