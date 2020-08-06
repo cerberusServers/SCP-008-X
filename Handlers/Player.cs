@@ -13,10 +13,9 @@ namespace SCP008X.Handlers
         {
             if (Plugin.Instance.Config.ZombieDamage >= 0 && ev.Attacker.Role == RoleType.Scp0492)
                 ev.Amount = Plugin.Instance.Config.ZombieDamage;
-            if (ev.Attacker.Role == RoleType.Scp0492)
-                ev.Attacker.AdrenalineHealth += Plugin.Instance.Config.Scp008Buff;
             if (ev.Attacker.Role == RoleType.Scp0492 && ev.Target.Role != RoleType.Scp0492)
             {
+                ev.Attacker.AdrenalineHealth += Plugin.Instance.Config.Scp008Buff;
                 int chance = (int)Gen.Next(1, 100);
                 if (chance <= Plugin.Instance.Config.InfectionChance)
                 {
@@ -50,9 +49,8 @@ namespace SCP008X.Handlers
             }
             if (DamageTypes.FromIndex(ev.HitInformation.Tool).name == "POISONED")
             {
-                ev.IsAllowed = false;
-                ev.Target.ReferenceHub.playerEffectsController.DisableEffect<Poisoned>();
                 ev.Target.SetRole(RoleType.Scp0492, true);
+                ev.Target.ReferenceHub.playerEffectsController.DisableEffect<Poisoned>();
                 ev.Target.Health = Plugin.Instance.Config.ZombieHealth;
             }
         }
@@ -72,7 +70,7 @@ namespace SCP008X.Handlers
                 {
                     ev.Player.ClearBroadcasts();
                     ev.Player.Broadcast(10, Plugin.Instance.Config.SuicideBroadcast);
-                    ev.Player.AdrenalineHealth = Plugin.Instance.Config.Scp008Buff;
+                    ev.Player.AdrenalineHealth += Plugin.Instance.Config.Scp008Buff;
                 }
             }
         }
