@@ -35,23 +35,15 @@ namespace SCP008X.Handlers
         }
         public void OnPlayerDying(DyingEventArgs ev)
         {
-            if (ev.Target.Role == RoleType.Scp0492 && ev.Target == ev.Killer)
-            {
-                ev.Target.ClearBroadcasts();
-                ev.Target.Broadcast(10, Plugin.Instance.Config.SuicideBroadcast);
-            }
-            if (ev.Killer.Role == RoleType.Scp0492 && ev.Target.Role != RoleType.Scp0492)
-            {
-                int chance = (int)Gen.Next(1, 100);
-                if (chance <= Plugin.Instance.Config.InfectionChance)
-                    ev.Target.SetRole(RoleType.Scp0492, true);
-                    ev.Target.Health = Plugin.Instance.Config.ZombieHealth;
-            }
-            if (DamageTypes.FromIndex(ev.HitInformation.Tool).name == "POISONED")
+            if (ev.Target.ReferenceHub.playerEffectsController.GetEffect<Poisoned>().Enabled)
             {
                 ev.Target.SetRole(RoleType.Scp0492, true);
-                ev.Target.ReferenceHub.playerEffectsController.DisableEffect<Poisoned>();
                 ev.Target.Health = Plugin.Instance.Config.ZombieHealth;
+            }
+            else
+            {
+                ev.IsAllowed = true;
+                ev.Target.ReferenceHub.playerEffectsController.DisableEffect<Poisoned>();
             }
         }
         public void OnRecall(StartingRecallEventArgs ev)
