@@ -1,8 +1,6 @@
-﻿using System.Linq;
-using Exiled.API.Features;
-using Exiled.Events.EventArgs;
+﻿using Exiled.API.Features;
 
-namespace Infection
+namespace SCP008X.Handlers
 {
     public class Server
     {
@@ -14,8 +12,7 @@ namespace Infection
         {
             if (plugin.Config.CassieAnnounce && plugin.Config.Announcement != null)
             {
-                if (plugin.Config.ZombiesInfect || plugin.Config.PeanutInfects || plugin.Config.DogInfects)
-                    Cassie.DelayedMessage(plugin.Config.Announcement, 5f, false, true);
+                Cassie.DelayedMessage(plugin.Config.Announcement, 5f, false, true);
             }
         }
     }
