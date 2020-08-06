@@ -16,7 +16,7 @@ An EXILED 2.0.x plugin for SCP:SL that adds SCP-008 into the game. This is funda
 | suicide_broadcast | string | Text that is displayed to all instances of SCP-049-2 | `null` |
 
 ## How does it work?
-It will give **SCP-049-2** the ability to infect it's targets on hit. The targets will receive the `Poisoned` status effect. In order to cure the infection, you must either use `SCP-500` for a guaranteed success or gamble with a `Medkit`'s 50% chance cure rate (This chance is configurable). Players that die due to being `Poisoned` or by an attack from SCP-049-2 will spawn as SCP-049-2 as well.
+It will give **SCP-049-2** the ability to infect it's targets on hit. The targets will receive the `Poisoned` status effect. In order to cure the infection, you must either use `SCP-500` for a guaranteed success or gamble with a `Medkit`'s 50% chance cure rate (This chance is configurable). Players that die while being `Poisoned` will spawn as SCP-049-2 as well.
 
 This plugin is still under development and I plan to add whatever is in high demand from the plugin's users, so feel free to submit your ideas!
 If something is not working as intended or outright broken, please submit an issue ticket and I'll look into it as soon as possible!
