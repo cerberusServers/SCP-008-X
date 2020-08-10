@@ -13,9 +13,10 @@ namespace SCP008X.Handlers
         {
             if (Plugin.Instance.Config.ZombieDamage >= 0 && ev.Attacker.Role == RoleType.Scp0492)
                 ev.Amount = Plugin.Instance.Config.ZombieDamage;
-            if (ev.Attacker.Role == RoleType.Scp0492 && ev.Target.Role != RoleType.Scp0492)
-            {
+            if (ev.Attacker.Role == RoleType.Scp0492 && ev.Attacker != ev.Target && ev.Target.Team != Team.SCP && ev.Target.Team != Team.RIP && ev.Target.Team != Team.TUT)
                 ev.Attacker.AdrenalineHealth += Plugin.Instance.Config.Scp008Buff;
+            if (ev.Attacker.Role == RoleType.Scp0492 && ev.Target.Team != Team.SCP && ev.Target.Team != Team.RIP && ev.Target.Team != Team.TUT)
+            {
                 int chance = (int)Gen.Next(1, 100);
                 if (chance <= Plugin.Instance.Config.InfectionChance)
                 {
@@ -37,12 +38,11 @@ namespace SCP008X.Handlers
         {
             if (ev.Target.ReferenceHub.playerEffectsController.GetEffect<Poisoned>().Enabled)
             {
-                ev.Target.SetRole(RoleType.Scp0492, true);
+                ev.Target.SetRole(RoleType.Scp0492, true, false);
                 ev.Target.Health = Plugin.Instance.Config.ZombieHealth;
             }
             else
             {
-                ev.IsAllowed = true;
                 ev.Target.ReferenceHub.playerEffectsController.DisableEffect<Poisoned>();
             }
         }
