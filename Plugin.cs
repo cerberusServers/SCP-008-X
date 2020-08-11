@@ -1,7 +1,6 @@
-﻿using System;
+using System;
 using Exiled.API.Features;
 using Exiled.API.Enums;
-using Exiled.Events.Handlers;
 using Player = Exiled.Events.Handlers.Player;
 using Server = Exiled.Events.Handlers.Server;
 
@@ -18,7 +17,7 @@ namespace SCP008X
         public override PluginPriority Priority { get; } = PluginPriority.Medium;
 
         public override string Author { get; } = "DGvagabond";
-        public override string Name { get; } = "SCP-008-X";
+        public override string Name { get; } = "Scp008X";
         public override Version Version { get; } = new Version(1, 1, 0);
         public override Version RequiredExiledVersion { get; } = new Version(2, 0, 10);
 
@@ -55,7 +54,6 @@ namespace SCP008X
             Player.Dying += PlayerEvents.OnPlayerDying;
             Player.ChangingRole += PlayerEvents.OnRoleChange;
             Player.MedicalItemUsed += PlayerEvents.OnHealing;
-            Scp049.StartingRecall += PlayerEvents.OnRecall;
             Server.RoundStarted += ServerEvents.OnRoundStart;
         }
         public void UnregisterEvents()
@@ -64,7 +62,6 @@ namespace SCP008X
             Player.Dying -= PlayerEvents.OnPlayerDying;
             Player.ChangingRole -= PlayerEvents.OnRoleChange;
             Player.MedicalItemUsed -= PlayerEvents.OnHealing;
-            Scp049.StartingRecall -= PlayerEvents.OnRecall;
             Server.RoundStarted -= ServerEvents.OnRoundStart;
 
             PlayerEvents = null;
