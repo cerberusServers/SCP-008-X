@@ -8,8 +8,6 @@ namespace SCP008X
         public bool IsEnabled { get; set; } = true;
         public int InfectionChance { get; set; } = 100;
         public int CureChance { get; set; } = 50;
-        [Description("Allow SCP-049 to instantly revive targets?")]
-        public bool BuffDoctor { get; set; } = false;
         public int ZombieHealth { get; set; } = 300;
         [Description("How much AHP should be given to Zombies?")]
         public int Scp008Buff { get; set; } = 10;
