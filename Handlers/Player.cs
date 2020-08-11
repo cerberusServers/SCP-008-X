@@ -9,7 +9,7 @@ namespace SCP008X.Handlers
         public Plugin plugin;
         public Player(Plugin plugin) => this.plugin = plugin;
 
-public void OnPlayerHurt(HurtingEventArgs ev)
+        public void OnPlayerHurt(HurtingEventArgs ev)
         {
             if(ev.Target.Team != Team.SCP && ev.Target.Team != Team.RIP && ev.Target.Team != Team.TUT && ev.Target != ev.Attacker)
             {
