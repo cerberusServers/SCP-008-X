@@ -1,7 +1,8 @@
 # SCP-008-X
 An EXILED 2.0.x plugin for SCP:SL that adds SCP-008 into the game. This is fundamentally for server hosts that want to add more a enganging SCP-049-2 experience for their players.
+## How does it work?
+It will give **SCP-049-2** the ability to infect it's targets on hit. The targets will receive the `Poisoned` status effect. In order to cure the infection, you must either use `SCP-500` for a guaranteed success or gamble with a `Medkit`'s 50% chance cure rate (This chance is configurable). Players that die while being `Poisoned` will spawn as SCP-049-2 as well.
 # Config Options
-
 | Name | Type | Description | Default |
 | --- | --- | --- | --- |
 | is_enabled | bool | Toggles the plugin | true |
@@ -13,9 +14,13 @@ An EXILED 2.0.x plugin for SCP:SL that adds SCP-008 into the game. This is funda
 | announcement | string | Sets the CASSIE announcement when the round starts | SCP 0 0 8 containment breach detected . Allremaining |
 | zombie_damage | int | Set how much damage SCP-049-2 deals on hit | 24 |
 | suicide_broadcast | string | Text that is displayed to all instances of SCP-049-2 | `null` |
+# Commands
+| Name | Arguments | Permissions | Action |
+| --- | --- | --- | --- |
+| infect | all / player | scp008.infect | Infects the player(s) with SCP-008 |
+| cure | all / player | scp008.cure | Cures the player(s) of SCP-008 |
 
-## How does it work?
-It will give **SCP-049-2** the ability to infect it's targets on hit. The targets will receive the `Poisoned` status effect. In order to cure the infection, you must either use `SCP-500` for a guaranteed success or gamble with a `Medkit`'s 50% chance cure rate (This chance is configurable). Players that die while being `Poisoned` will spawn as SCP-049-2 as well.
+These commands will only work for those with the listed permissions AND access to the remote admin panel. Please keep this in mind.
 
 This plugin is still under development and I plan to add whatever is in high demand from the plugin's users, so feel free to submit your ideas!
 If something is not working as intended or outright broken, please submit an issue ticket and I'll look into it as soon as possible!
