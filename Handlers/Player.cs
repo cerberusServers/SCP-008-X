@@ -11,7 +11,7 @@ namespace SCP008X.Handlers
 
         public void OnPlayerHurt(HurtingEventArgs ev)
         {
-            if(ev.Target.Team != Team.SCP && ev.Target.Team != Team.RIP && ev.Target.Team != Team.TUT && ev.Target != ev.Attacker)
+            if (ev.Target.Role.IsSCP(false) && ev.Target != ev.Attacker)
             {
                 if (ev.Attacker.Role == RoleType.Scp0492)
                 {
