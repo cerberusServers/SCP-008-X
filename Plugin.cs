@@ -1,24 +1,23 @@
-using System;
+﻿using System;
 using Exiled.API.Features;
 using Exiled.API.Enums;
 using Player = Exiled.Events.Handlers.Player;
 using Server = Exiled.Events.Handlers.Server;
+using Exiled.Events.Handlers;
 
 namespace SCP008X
 {
     public class Plugin : Plugin<Config>
     {
-        private static readonly Lazy<Plugin> LInstance = new Lazy<Plugin>(() => new Plugin());
-        public static Plugin Instance => LInstance.Value;
-        private Plugin()
-        {
-        }
+        internal static Plugin Instance { get; } = new Plugin();
+
+        private Plugin() { }
 
         public override PluginPriority Priority { get; } = PluginPriority.Medium;
 
         public override string Author { get; } = "DGvagabond";
         public override string Name { get; } = "Scp008X";
-        public override Version Version { get; } = new Version(1, 1, 0);
+        public override Version Version { get; } = new Version(1, 1, 1);
         public override Version RequiredExiledVersion { get; } = new Version(2, 0, 10);
 
         private Handlers.Player PlayerEvents;
@@ -50,18 +49,22 @@ namespace SCP008X
             PlayerEvents = new Handlers.Player(this);
             ServerEvents = new Handlers.Server(this);
 
+            Player.Left += PlayerEvents.OnPlayerLeave;
             Player.Hurting += PlayerEvents.OnPlayerHurt;
             Player.Dying += PlayerEvents.OnPlayerDying;
             Player.ChangingRole += PlayerEvents.OnRoleChange;
             Player.MedicalItemUsed += PlayerEvents.OnHealing;
+            Scp049.StartingRecall += PlayerEvents.OnReviving;
             Server.RoundStarted += ServerEvents.OnRoundStart;
         }
         public void UnregisterEvents()
         {
+            Player.Left -= PlayerEvents.OnPlayerLeave;
             Player.Hurting -= PlayerEvents.OnPlayerHurt;
             Player.Dying -= PlayerEvents.OnPlayerDying;
             Player.ChangingRole -= PlayerEvents.OnRoleChange;
             Player.MedicalItemUsed -= PlayerEvents.OnHealing;
+            Scp049.StartingRecall -= PlayerEvents.OnReviving;
             Server.RoundStarted -= ServerEvents.OnRoundStart;
 
             PlayerEvents = null;
