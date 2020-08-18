@@ -8,6 +8,7 @@ It will give **SCP-049-2** the ability to infect it's targets on hit. The target
 | is_enabled | bool | Toggles the plugin | true |
 | infection_chance | int | Percentage chance of infection | 25% |
 | cure_chance | int | Percentage chance of being cured when using a medkit | 50% |
+| buff_doctor | bool | Enable instant revives for SCP-049 | false |
 | zombie_health | int | Amount of health infected zombies spawn with | 300 |
 | scp008_buff | int | Amount of AHP zombies spawn with and gain on each hit | 10 |
 | cassie_announcement | bool | Toggles the announcement when the round starts | true |
