@@ -62,7 +62,6 @@ namespace SCP008X.Handlers
                 if (ev.Target.ReferenceHub.playerEffectsController.GetEffect<Poisoned>().Enabled || ev.Killer.Role == RoleType.Scp0492)
                 {
                     ev.Target.SetRole(RoleType.Scp0492, true, false);
-                    ev.Target.Health = Plugin.Instance.Config.ZombieHealth;
                 }
             }
             SCP008Check();
@@ -74,8 +73,11 @@ namespace SCP008X.Handlers
                 if(Plugin.Instance.Config.SuicideBroadcast != null)
                     ev.Player.ClearBroadcasts();
                     ev.Player.Broadcast(10, Plugin.Instance.Config.SuicideBroadcast);
+                if (!Plugin.Instance.Config.RetainInventory)
+                    ev.Player.ClearInventory();
                 if(Plugin.Instance.Config.Scp008Buff >= 0)
                     ev.Player.AdrenalineHealth += Plugin.Instance.Config.Scp008Buff;
+                ev.Player.Health = Plugin.Instance.Config.ZombieHealth;
             }
             SCP008Check();
         }
