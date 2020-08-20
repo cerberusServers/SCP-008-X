@@ -16,13 +16,6 @@ It will give **SCP-049-2** the ability to infect it's targets on hit. The target
 | zombie_damage | int | Set how much damage SCP-049-2 deals on hit | 24 |
 | suicide_broadcast | string | Text that is displayed to all instances of SCP-049-2 | `null` |
 | retain_inventory| bool | Allow players to keep their inventory as zombies. Items can NOT be used by them, this is purely for loot. | true |
-# Commands
-| Name | Arguments | Permissions | Action |
-| --- | --- | --- | --- |
-| infect | all / player | scp008.infect | Infects the player(s) with SCP-008 |
-| cure | all / player | scp008.cure | Cures the player(s) of SCP-008 |
-
-These commands will only work for those with the listed permissions AND access to the remote admin panel. Please keep this in mind.
 
 This plugin is still under development and I plan to add whatever is in high demand from the plugin's users, so feel free to submit your ideas!
 If something is not working as intended or outright broken, please submit an issue ticket and I'll look into it as soon as possible!
