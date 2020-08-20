@@ -24,14 +24,14 @@ namespace SCP008X.Handlers
         }
         public void OnPlayerHurt(HurtingEventArgs ev)
         {
-            if (ev.Target.Role.IsSCP(false) && ev.Target != ev.Attacker && ev.Attacker.Role == RoleType.Scp0492)
+            if (ev.Target != ev.Attacker && ev.Attacker.Role == RoleType.Scp0492)
             {
                 if (Plugin.Instance.Config.ZombieDamage >= 0)
                     ev.Amount = Plugin.Instance.Config.ZombieDamage;
                 if (Plugin.Instance.Config.Scp008Buff >= 0)
                     ev.Attacker.AdrenalineHealth += Plugin.Instance.Config.Scp008Buff;
                 int chance = (int)Gen.Next(1, 100);
-                if (chance <= Plugin.Instance.Config.InfectionChance)
+                if (chance <= Plugin.Instance.Config.InfectionChance && ev.Target.Team != Team.SCP)
                 {
                     ev.Target.ReferenceHub.playerEffectsController.EnableEffect<Poisoned>();
                     ev.Target.ClearBroadcasts();
@@ -43,7 +43,7 @@ namespace SCP008X.Handlers
         {
             if(ev.Player.ReferenceHub.playerEffectsController.GetEffect<Poisoned>().Enabled)
             {
-                int cure = (int)Gen.Next(1, 100);
+                int cure = Gen.Next(1, 100);
                 if (ev.Item == ItemType.SCP500)
                     ev.Player.ReferenceHub.playerEffectsController.DisableEffect<Poisoned>();
                 if (ev.Item == ItemType.Medkit && cure <= Plugin.Instance.Config.CureChance)
@@ -57,12 +57,9 @@ namespace SCP008X.Handlers
         }
         public void OnPlayerDying(DyingEventArgs ev)
         {
-            if(ev.Target.Role.IsSCP(false))
+            if (ev.Target.ReferenceHub.playerEffectsController.GetEffect<Poisoned>().Enabled || ev.Killer.Role == RoleType.Scp0492)
             {
-                if (ev.Target.ReferenceHub.playerEffectsController.GetEffect<Poisoned>().Enabled || ev.Killer.Role == RoleType.Scp0492)
-                {
-                    ev.Target.SetRole(RoleType.Scp0492, true, false);
-                }
+                ev.Target.SetRole(RoleType.Scp0492, true, false);
             }
             SCP008Check();
         }
