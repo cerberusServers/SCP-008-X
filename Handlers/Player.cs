@@ -20,7 +20,7 @@ namespace SCP008X.Handlers
         }
         public void OnPlayerLeave(LeftEventArgs ev)
         {
-            if (ev.Player.Role == RoleType.Scp0492) SCP008Check();
+            
         }
         public void OnPlayerHurt(HurtingEventArgs ev)
         {
