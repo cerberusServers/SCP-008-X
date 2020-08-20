@@ -20,7 +20,7 @@ namespace SCP008X.Handlers
         }
         public void OnPlayerLeave(LeftEventArgs ev)
         {
-            SCP008Check();
+            if (ev.Player.Role == RoleType.Scp0492) SCP008Check();
         }
         public void OnPlayerHurt(HurtingEventArgs ev)
         {
@@ -61,7 +61,7 @@ namespace SCP008X.Handlers
             {
                 ev.Target.SetRole(RoleType.Scp0492, true, false);
             }
-            SCP008Check();
+            if (ev.Player.Role == RoleType.Scp0492) SCP008Check();
         }
         public void OnRoleChange(ChangingRoleEventArgs ev)
         {
@@ -76,7 +76,7 @@ namespace SCP008X.Handlers
                     ev.Player.AdrenalineHealth += Plugin.Instance.Config.Scp008Buff;
                 ev.Player.Health = Plugin.Instance.Config.ZombieHealth;
             }
-            SCP008Check();
+            if(ev.Player.Role == RoleType.Scp0492) SCP008Check();
         }
         public void OnReviving(StartingRecallEventArgs ev)
         {
