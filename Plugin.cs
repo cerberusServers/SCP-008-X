@@ -10,7 +10,6 @@ namespace SCP008X
     public class Plugin : Plugin<Config>
     {
         internal static Plugin Instance { get; } = new Plugin();
-
         private Plugin() { }
 
         public override PluginPriority Priority { get; } = PluginPriority.Medium;
@@ -28,8 +27,8 @@ namespace SCP008X
         {
             try
             {
+                base.OnEnabled();
                 RegisterEvents();
-                Log.Info($"v{Version}, made by {Author}, successfully loaded.");
             }
 
             catch (Exception e)
@@ -40,6 +39,7 @@ namespace SCP008X
 
         public override void OnDisabled()
         {
+            base.OnDisabled();
             UnregisterEvents();
         }
 
