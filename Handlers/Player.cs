@@ -61,7 +61,7 @@ namespace SCP008X.Handlers
             {
                 ev.Target.SetRole(RoleType.Scp0492, true, false);
             }
-            if (ev.Player.Role == RoleType.Scp0492) SCP008Check();
+            if (ev.Target.Role == RoleType.Scp0492) SCP008Check();
         }
         public void OnRoleChange(ChangingRoleEventArgs ev)
         {
@@ -90,7 +90,7 @@ namespace SCP008X.Handlers
         {
             if (contained008) return;
             List<Targets> infecteds = Targets.List.Where(player => player.Role == RoleType.Scp049 || player.Role == RoleType.Scp0492).ToList();
-            if (infecteds == null)
+            if (infecteds.Count == 0)
             {
                 Cassie.Message("SCP 0 0 8 has been secured . NoSCPsLeft");
                 contained008 = true;
