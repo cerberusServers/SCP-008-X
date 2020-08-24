@@ -1,16 +1,12 @@
 ﻿using CustomPlayerEffects;
-using Targets = Exiled.API.Features.Player;
 using Exiled.Events.EventArgs;
-using System.Collections.Generic;
-using System.Linq;
-using Exiled.API.Features;
+using UnityEngine;
 
 namespace SCP008X.Handlers
 {
     public class Player
     {
         public System.Random Gen = new System.Random();
-        private bool contained008 = false;
         public Plugin plugin;
         public Player(Plugin plugin) => this.plugin = plugin;
 
@@ -34,8 +30,7 @@ namespace SCP008X.Handlers
                 if (chance <= Plugin.Instance.Config.InfectionChance && ev.Target.Team != Team.SCP)
                 {
                     ev.Target.ReferenceHub.playerEffectsController.EnableEffect<Poisoned>();
-                    ev.Target.ClearBroadcasts();
-                    ev.Target.Broadcast(10, "<color=yellow>You've been <color=red>infected</color>!</color>\n<i>Use a medkit or SCP-500!</i>");
+                    ev.Target.ShowHint(Plugin.Instance.Config.InfectionAlert, 10f);
                 }
             }
         }
@@ -61,7 +56,8 @@ namespace SCP008X.Handlers
             {
                 ev.Target.SetRole(RoleType.Scp0492, true, false);
             }
-            if (ev.Target.Role == RoleType.Scp0492) SCP008Check();
+            else
+                ev.IsAllowed = true;
         }
         public void OnRoleChange(ChangingRoleEventArgs ev)
         {
@@ -76,7 +72,6 @@ namespace SCP008X.Handlers
                     ev.Player.AdrenalineHealth += Plugin.Instance.Config.Scp008Buff;
                 ev.Player.Health = Plugin.Instance.Config.ZombieHealth;
             }
-            if(ev.Player.Role == RoleType.Scp0492) SCP008Check();
         }
         public void OnReviving(StartingRecallEventArgs ev)
         {
@@ -84,16 +79,6 @@ namespace SCP008X.Handlers
             {
                 ev.IsAllowed = false;
                 ev.Target.SetRole(RoleType.Scp0492, true, false);
-            }
-        }
-        private void SCP008Check()
-        {
-            if (contained008) return;
-            List<Targets> infecteds = Targets.List.Where(player => player.Role == RoleType.Scp049 || player.Role == RoleType.Scp0492).ToList();
-            if (infecteds.Count == 0)
-            {
-                Cassie.Message("SCP 0 0 8 has been secured . NoSCPsLeft");
-                contained008 = true;
             }
         }
     }
