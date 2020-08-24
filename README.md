@@ -15,6 +15,7 @@ It will give **SCP-049-2** the ability to infect it's targets on hit. The target
 | announcement | string | Sets the CASSIE announcement when the round starts | SCP 0 0 8 containment breach detected . Allremaining |
 | zombie_damage | int | Set how much damage SCP-049-2 deals on hit | 24 |
 | suicide_broadcast | string | Text that is displayed to all instances of SCP-049-2 | `null` |
+| infection_alert | string | A hint that is displayed to players after they're infected | `null` |
 | retain_inventory| bool | Allow players to keep their inventory as zombies. Items can NOT be used by them, this is purely for loot. | true |
 
 This plugin is still under development and I plan to add whatever is in high demand from the plugin's users, so feel free to submit your ideas!
