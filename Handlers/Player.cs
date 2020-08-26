@@ -55,6 +55,8 @@ namespace SCP008X.Handlers
         public void OnPlayerDying(DyingEventArgs ev)
         {
             if (ev.Target.Role == RoleType.Scp0492) { ClearSCP008(ev.Target); }
+            if (DamageTypes.FromIndex(ev.HitInformation.Tool).name == "DECONT")
+                ev.IsAllowed = true;
             if (ev.Target.ReferenceHub.playerEffectsController.GetEffect<Corroding>().Enabled)
                 ev.IsAllowed = true;
             else if (ev.Target.ReferenceHub.playerEffectsController.GetEffect<Poisoned>().Enabled || ev.Killer.Role == RoleType.Scp0492)
