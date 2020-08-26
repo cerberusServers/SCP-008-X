@@ -1,6 +1,8 @@
 ﻿using CustomPlayerEffects;
-using Exiled.Events.EventArgs;
 using UnityEngine;
+using User = Exiled.API.Features.Player;
+using Exiled.Events.EventArgs;
+using SCP008X.Components;
 
 namespace SCP008X.Handlers
 {
@@ -30,7 +32,7 @@ namespace SCP008X.Handlers
                 if (chance <= Plugin.Instance.Config.InfectionChance && ev.Target.Team != Team.SCP)
                 {
                     ev.Target.ReferenceHub.playerEffectsController.EnableEffect<Poisoned>();
-                    ev.Target.ShowHint(Plugin.Instance.Config.InfectionAlert, 10f);
+                    ev.Target.ShowHint($"{Plugin.Instance.Config.InfectionAlert}", 10f);
                 }
             }
         }
@@ -52,12 +54,17 @@ namespace SCP008X.Handlers
         }
         public void OnPlayerDying(DyingEventArgs ev)
         {
-            if (ev.Target.ReferenceHub.playerEffectsController.GetEffect<Poisoned>().Enabled || ev.Killer.Role == RoleType.Scp0492)
+            if (ev.Target.Role == RoleType.Scp0492) { ClearSCP008(ev.Target); }
+            if (ev.Target.ReferenceHub.playerEffectsController.GetEffect<Corroding>().Enabled)
+                ev.IsAllowed = true;
+            else if (ev.Target.ReferenceHub.playerEffectsController.GetEffect<Poisoned>().Enabled || ev.Killer.Role == RoleType.Scp0492)
             {
                 ev.Target.SetRole(RoleType.Scp0492, true, false);
+                RoundSummary.changed_into_zombies++;
             }
             else
                 ev.IsAllowed = true;
+                    
         }
         public void OnRoleChange(ChangingRoleEventArgs ev)
         {
@@ -71,7 +78,10 @@ namespace SCP008X.Handlers
                 if(Plugin.Instance.Config.Scp008Buff >= 0)
                     ev.Player.AdrenalineHealth += Plugin.Instance.Config.Scp008Buff;
                 ev.Player.Health = Plugin.Instance.Config.ZombieHealth;
+                ev.Player.GameObject.AddComponent<SCP008BuffComponent>();
+                ev.Player.ShowHint("<color=yellow><b>SCP-008 Infused</b></color>\n<i>Players you hit will be infected!</i>");
             }
+            if (ev.NewRole != RoleType.Scp0492 || ev.NewRole != RoleType.Scp096) { ClearSCP008(ev.Player); ev.Player.AdrenalineHealth = 0; }
         }
         public void OnReviving(StartingRecallEventArgs ev)
         {
@@ -80,6 +90,13 @@ namespace SCP008X.Handlers
                 ev.IsAllowed = false;
                 ev.Target.SetRole(RoleType.Scp0492, true, false);
             }
+        }
+
+        private void ClearSCP008(User player)
+        {
+            SCP008BuffComponent comp = player.GameObject.GetComponent<SCP008BuffComponent>();
+            if (comp != null)
+                Object.Destroy(comp);
         }
     }
 }
