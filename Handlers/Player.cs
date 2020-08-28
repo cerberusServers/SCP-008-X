@@ -1,5 +1,4 @@
 ﻿using CustomPlayerEffects;
-using UnityEngine;
 using User = Exiled.API.Features.Player;
 using Exiled.Events.EventArgs;
 using SCP008X.Components;
@@ -54,19 +53,20 @@ namespace SCP008X.Handlers
         }
         public void OnPlayerDying(DyingEventArgs ev)
         {
+            if (DamageTypes.FromIndex(ev.HitInformation.Tool).name == "DECONT" ||
+                   DamageTypes.FromIndex(ev.HitInformation.Tool).name == "TESLA" ||
+                   DamageTypes.FromIndex(ev.HitInformation.Tool).name == "FALLDOWN" ||
+                   ev.Target.ReferenceHub.playerEffectsController.GetEffect<Corroding>().Enabled)
+            {
+                ev.IsAllowed = true;
+                return;
+            }
             if (ev.Target.Role == RoleType.Scp0492) { ClearSCP008(ev.Target); }
-            if (DamageTypes.FromIndex(ev.HitInformation.Tool).name == "DECONT")
-                ev.IsAllowed = true;
-            if (ev.Target.ReferenceHub.playerEffectsController.GetEffect<Corroding>().Enabled)
-                ev.IsAllowed = true;
-            else if (ev.Target.ReferenceHub.playerEffectsController.GetEffect<Poisoned>().Enabled || ev.Killer.Role == RoleType.Scp0492)
+            if (ev.Target.ReferenceHub.playerEffectsController.GetEffect<Poisoned>().Enabled || ev.Killer.Role == RoleType.Scp0492)
             {
                 ev.Target.SetRole(RoleType.Scp0492, true, false);
                 RoundSummary.changed_into_zombies++;
             }
-            else
-                ev.IsAllowed = true;
-                    
         }
         public void OnRoleChange(ChangingRoleEventArgs ev)
         {
@@ -98,7 +98,7 @@ namespace SCP008X.Handlers
         {
             SCP008BuffComponent comp = player.GameObject.GetComponent<SCP008BuffComponent>();
             if (comp != null)
-                Object.Destroy(comp);
+                UnityEngine.Object.Destroy(comp);
         }
     }
 }
