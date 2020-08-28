@@ -11,6 +11,7 @@ It will give **SCP-049-2** the ability to infect it's targets on hit. The target
 | buff_doctor | bool | Enable instant revives for SCP-049 | false |
 | zombie_health | int | Amount of health infected zombies spawn with | 300 |
 | scp008_buff | int | Amount of AHP zombies spawn with and gain on each hit | 10 |
+| max_ahp | int | Maximum amount of AHP zombies can reach | 100 |
 | cassie_announcement | bool | Toggles the announcement when the round starts | true |
 | announcement | string | Sets the CASSIE announcement when the round starts | SCP 0 0 8 containment breach detected . Allremaining |
 | zombie_damage | int | Set how much damage SCP-049-2 deals on hit | 24 |
