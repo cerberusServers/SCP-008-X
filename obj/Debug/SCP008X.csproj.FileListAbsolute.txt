@@ -1,2 +1,0 @@
-C:\Users\franc\Documents\Visual Proyects\SCP-008-X\obj\Debug\SCP008X.csprojAssemblyReference.cache
-C:\Users\franc\Documents\Visual Proyects\SCP-008-X\obj\Debug\SCP008X.csproj.CoreCompileInputs.cache
