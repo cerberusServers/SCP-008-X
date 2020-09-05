@@ -74,14 +74,14 @@ namespace SCP008X.Handlers
             {
                 if(Plugin.Instance.Config.SuicideBroadcast != null)
                     ev.Player.ClearBroadcasts();
-                    ev.Player.Broadcast(10, Plugin.Instance.Config.SuicideBroadcast);
+                    ev.Player.Broadcast(12, Plugin.Instance.Config.SuicideBroadcast);
                 if (!Plugin.Instance.Config.RetainInventory)
                     ev.Player.ClearInventory();
                 if(Plugin.Instance.Config.Scp008Buff >= 0)
                     ev.Player.AdrenalineHealth += Plugin.Instance.Config.Scp008Buff;
                 ev.Player.Health = Plugin.Instance.Config.ZombieHealth;
                 ev.Player.GameObject.AddComponent<SCP008BuffComponent>();
-                ev.Player.ShowHint("<color=yellow><b>SCP-008 Infused</b></color>\n<i>Players you hit will be infected!</i>");
+                ev.Player.ShowHint("<color=yellow>Fuiste infectado por el </color><b><color=red>SCP-008</color></b>\n<i><color=yellow>Los humanos que golpes tendran una probabilidad de infectarse</color></i>", 15f);
             }
             if (ev.NewRole != RoleType.Scp0492 || ev.NewRole != RoleType.Scp096) { ClearSCP008(ev.Player); ev.Player.AdrenalineHealth = 0; }
         }
