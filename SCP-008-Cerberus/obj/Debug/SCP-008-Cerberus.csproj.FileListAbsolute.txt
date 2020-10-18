@@ -181,3 +181,4 @@ C:\Users\franc\Documents\Visual Proyects\SCP-008-X\SCP-008-Cerberus\obj\Debug\SC
 C:\Users\franc\Documents\Visual Proyects\SCP-008-X\SCP-008-Cerberus\obj\Debug\SCP-008-Cerberus.csproj.CopyComplete
 C:\Users\franc\Documents\Visual Proyects\SCP-008-X\SCP-008-Cerberus\obj\Debug\SCP-008-Cerberus.dll
 C:\Users\franc\Documents\Visual Proyects\SCP-008-X\SCP-008-Cerberus\obj\Debug\SCP-008-Cerberus.pdb
+C:\Users\franc\Documents\Visual Proyects\SCP-008-X\SCP-008-Cerberus\bin\Debug\scp035.dll
