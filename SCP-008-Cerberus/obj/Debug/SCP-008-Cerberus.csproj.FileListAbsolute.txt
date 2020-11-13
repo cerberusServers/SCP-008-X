@@ -118,9 +118,7 @@ C:\Users\franc\Documents\Visual Proyects\SCP-008-X\SCP-008-Cerberus\bin\Debug\Un
 C:\Users\franc\Documents\Visual Proyects\SCP-008-X\SCP-008-Cerberus\bin\Debug\NorthwoodLib.dll
 C:\Users\franc\Documents\Visual Proyects\SCP-008-X\SCP-008-Cerberus\bin\Debug\UnityEngine.TextRenderingModule.dll
 C:\Users\franc\Documents\Visual Proyects\SCP-008-X\SCP-008-Cerberus\bin\Debug\Unity.TextMeshPro.dll
-C:\Users\franc\Documents\Visual Proyects\SCP-008-X\SCP-008-Cerberus\bin\Debug\Facepunch.Steamworks.Win64.dll
 C:\Users\franc\Documents\Visual Proyects\SCP-008-X\SCP-008-Cerberus\bin\Debug\BouncyCastle.Crypto.dll
-C:\Users\franc\Documents\Visual Proyects\SCP-008-X\SCP-008-Cerberus\bin\Debug\Mono.Nat.dll
 C:\Users\franc\Documents\Visual Proyects\SCP-008-X\SCP-008-Cerberus\bin\Debug\zxing.unity.dll
 C:\Users\franc\Documents\Visual Proyects\SCP-008-X\SCP-008-Cerberus\bin\Debug\UnityEngine.UnityWebRequestAudioModule.dll
 C:\Users\franc\Documents\Visual Proyects\SCP-008-X\SCP-008-Cerberus\bin\Debug\CloudflareSolverRe.dll
