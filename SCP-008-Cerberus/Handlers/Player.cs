@@ -21,7 +21,7 @@ namespace SCP008X.Handlers
         }
         public void OnPlayerHurt(HurtingEventArgs ev)
         {
-            if (ev.Target != ev.Attacker && ev.Attacker.Role == RoleType.Scp0492 && ev.Target != scp035.API.Scp035Data.GetScp035())
+            if (ev.Target != ev.Attacker && ev.Attacker.Role == RoleType.Scp0492)
             {
                 
                 if (Plugin.Instance.Config.ZombieDamage >= 0)
