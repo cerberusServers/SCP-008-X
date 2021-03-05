@@ -1,49 +1,14 @@
-﻿namespace SCP008X
+﻿using Exiled.API.Features;
+using SCP_343.API;
+using scp035.API;
+
+namespace SCP008X
 {
     public static class Extensions
     {
-        public static bool NonHuman(this RoleType Role, bool OnlySCPs)
+        public static bool Gun(this ItemType item)
         {
-            if (OnlySCPs)
-            {
-                switch (Role)
-                {
-                    case RoleType.Scp049:
-                    case RoleType.Scp0492:
-                    case RoleType.Scp079:
-                    case RoleType.Scp096:
-                    case RoleType.Scp106:
-                    case RoleType.Scp173:
-                    case RoleType.Scp93953:
-                    case RoleType.Scp93989:
-                        return true;
-                    default:
-                        return false;
-                }
-            }
-            else
-            {
-                switch (Role)
-                {
-                    case RoleType.Scp049:
-                    case RoleType.Scp0492:
-                    case RoleType.Scp079:
-                    case RoleType.Scp096:
-                    case RoleType.Scp106:
-                    case RoleType.Scp173:
-                    case RoleType.Scp93953:
-                    case RoleType.Scp93989:
-                    case RoleType.Spectator:
-                    case RoleType.None:
-                        return true;
-                    default:
-                        return false;
-                }
-            }
-        }
-        public static bool Gun(this ItemType Item)
-        {
-            switch (Item)
+            switch (item)
             {
                 case ItemType.GunCOM15:
                 case ItemType.GunE11SR:
@@ -57,5 +22,14 @@
                     return false;
             }
         }
+
+        public static bool IsSerpentsHand(this Player player) =>
+            SerpentsHand.API.SerpentsHand.GetSHPlayers().Contains(player);
+
+        public static bool IsScp035(this Player player) => Scp035Data.GetScp035() == player;
+        
+        public static bool IsScp999(this Player player) => SCP999API.GetScp999() == player;
+
+        public static bool IsScp343(this Player player) => SCP_343Data.TryGet343() == player;
     }
 }

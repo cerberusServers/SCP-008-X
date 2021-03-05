@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30309.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SCP008X", "SCP-008\SCP008X.csproj", "{606F40C9-8CFD-4C43-B551-D7305BA0F303}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SCP008X", "SCP008X.csproj", "{606F40C9-8CFD-4C43-B551-D7305BA0F303}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

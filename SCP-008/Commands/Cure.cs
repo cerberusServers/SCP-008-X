@@ -1,20 +1,16 @@
-﻿using RemoteAdmin;
-using CommandSystem;
+﻿using CommandSystem;
 using System;
 using Exiled.API.Features;
-using UnityEngine;
 using Exiled.Permissions.Extensions;
-using SCP008X.Components;
-using MEC;
 
-namespace SCP008X.Commands
+namespace SCP008X
 {
     [CommandHandler(typeof(RemoteAdminCommandHandler))]
     public class Cure : ICommand
     {
         public string Command { get; } = "cure";
 
-        public string[] Aliases { get; } = null;
+        public string[] Aliases { get; } = { };
 
         public string Description { get; } = "Forcefully cure a player from SCP-008";
 
@@ -25,28 +21,37 @@ namespace SCP008X.Commands
                 response = "Missing permissions.";
                 return false;
             }
+            
             Player ply = Player.Get(arguments.At(0));
+            
             if (ply == null)
             {
                 response = "Invalid player.";
                 return false;
             }
-            if(!ply.ReferenceHub.TryGetComponent(out SCP008 scp008))
+            
+            if(!ply.ReferenceHub.TryGetComponent(out Scp008 scp008))
             {
                 response = "This player is not infected.";
                 return false;
             }
+            
             try
             {
                 UnityEngine.Object.Destroy(scp008);
+                EventHandlers.Victims.Remove(ply);
+                
+                if (EventHandlers.Scp008Check()) 
+                    EventHandlers.Contained(ply);
+
                 response = $"{ply.Nickname} has been cured.";
                 return true;
             }
             catch (Exception e)
             {
-                Log.Debug($"Failed to destroy SCP008 component! {e}", SCP008X.Instance.Config.DebugMode);
+                Log.Debug($"Failed to destroy SCP008 component! {e}", Scp008X.Instance.Config.DebugMode);
                 response = $"Failed to cure {ply.Nickname}. Please contact DGvagabond for support.";
-                throw;
+                return false;
             }
         }
     }
